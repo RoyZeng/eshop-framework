@@ -91,4 +91,8 @@ public class EopContext {
         domain = domain + getContext().getContextPath();
         return domain;
     }
+
+    public static void remove() {
+        EopContextHolder.remove();
+    }
 }

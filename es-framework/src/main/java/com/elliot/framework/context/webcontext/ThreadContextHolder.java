@@ -63,4 +63,9 @@ public class ThreadContextHolder {
         return SessionContextThreadLocalHolder.get();
     }
 
+    public static void remove() {
+        SessionContextThreadLocalHolder.remove();
+        HttpRequestThreadLocalHolder.remove();
+        HttpResponseThreadLocalHolder.remove();
+    }
 }
