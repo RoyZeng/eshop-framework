@@ -35,20 +35,18 @@ public abstract class AutoRegisterPluginsBundle implements IPluginBundle {
     }
 
 
-    private void registerPlugin1(IPlugin plugin)
-/*     */   {
-/*  47 */     if (this.plugins == null) {
-/*  48 */       this.plugins = new ArrayList();
-/*     */     }
-/*     */
-/*  51 */     if (!this.plugins.contains(plugin)) {
-/*  52 */       this.plugins.add(plugin);
-/*     */     }
-/*     */
-/*  55 */     if (loger.isDebugEnabled())
-/*  56 */       loger.debug("为插件桩" + getName() + "注册插件：" + plugin.getClass());
-/*     */   }
-    /*     */
+    private void registerPlugin1(IPlugin plugin) {
+        if (this.plugins == null) {
+            this.plugins = new ArrayList();
+        }
+
+        if (!this.plugins.contains(plugin)) {
+            this.plugins.add(plugin);
+        }
+        if (loger.isDebugEnabled())
+            loger.debug("为插件桩" + getName() + "注册插件：" + plugin.getClass());
+    }
+
 /*     */   private void registerPlugin2(IPlugin plugin)
 /*     */   {
 /*  65 */     if (this.saasPlugins == null) {

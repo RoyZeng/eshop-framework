@@ -81,7 +81,7 @@ public class ComponentContext
         componentView.setName(componentEl.getAttribute("name"));
         componentView.setAuthor(componentEl.getAttribute("author"));
         componentView.setVersion(componentEl.getAttribute("version"));
-        componentView.setJavashop_version(needVersion);
+        componentView.setEsf_version(needVersion);
         componentView.setDescription(componentEl.getAttribute("description"));
 
         if (!versionLargerThen(currentVersion, needVersion))

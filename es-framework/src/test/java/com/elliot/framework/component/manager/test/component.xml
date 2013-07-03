@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="base应用基础组件"  version="1.0" javashop_version="3.0.0" author="javashop">
+<component name="base应用基础组件"  version="1.0" esf_version="3.0.0" author="esf">
 
 	<plugins>
 	 		<plugin name="uri-sitemap生成插件" id="themeUriSitemapPlugin">

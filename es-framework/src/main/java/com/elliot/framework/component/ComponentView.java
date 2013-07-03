@@ -13,7 +13,7 @@ public class ComponentView
     private int id;
     private String componentid;
     private String version;
-    private String javashop_version;
+    private String esf_version;
     private String author;
     private String description;
     private IComponent component;
@@ -138,14 +138,14 @@ public class ComponentView
         this.version = version;
     }
 
-    public String getJavashop_version()
+    public String getEsf_version()
     {
-        return this.javashop_version;
+        return this.esf_version;
     }
 
-    public void setJavashop_version(String javashop_version)
+    public void setEsf_version(String esf_version)
     {
-        this.javashop_version = javashop_version;
+        this.esf_version = esf_version;
     }
 
     public String getAuthor()

@@ -167,8 +167,9 @@ public class ComponentManager extends BaseSupport
         }
 
         ComponentView componentView = getComponentView(componentid);
-        IPlugin plugin;
+
         List<PluginView> pluginList = componentView.getPluginList();
+        IPlugin plugin;
         for (PluginView pluginView : pluginList) {
             String pluginid = pluginView.getId();
             plugin = (IPlugin) SpringContextHolder.getBean(pluginid);
