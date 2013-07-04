@@ -87,7 +87,7 @@ public class ComponentContext
         if (!versionLargerThen(currentVersion, needVersion))
         {
             componentView.setInstall_state(2);
-            componentView.setError_message("当前的Javashop版本无法安装此组件，需要的Javashop版本[" + needVersion + "] ，当前版本[" + currentVersion + "]");
+            componentView.setError_message("当前的e-shop版本无法安装此组件，需要的e-shop版本[" + needVersion + "] ，当前版本[" + currentVersion + "]");
         }
 
         Element pluginsEl = XMLUtil.getChildByTagName(componentEl, "plugins");

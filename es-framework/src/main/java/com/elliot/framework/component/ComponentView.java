@@ -9,8 +9,8 @@ import java.util.List;
 public class ComponentView
         implements Cloneable
 {
-    private String name;
     private int id;
+    private String name;
     private String componentid;
     private String version;
     private String esf_version;

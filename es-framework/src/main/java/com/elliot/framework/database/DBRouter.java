@@ -1,12 +1,11 @@
 package com.elliot.framework.database;
 
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 import com.elliot.framework.utils.StringUtil;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.elliot.context.model.EopSite;
-import com.elliot.context.EopContext;
-import com.elliot.framework.database.IDBRouter;
 
 /**
  * 简单的分表方式SAAS数据路由器<br/>
@@ -33,7 +32,7 @@ public class DBRouter implements IDBRouter {
 			return;
 		}
 
-		EopSite site = EopContext.getContext().getCurrentSite();
+		EopSite site = EsfContext.getContext().getCurrentSite();
 		Integer userid = site.getUserid();
 		Integer siteid = site.getId();
 
@@ -52,7 +51,7 @@ public class DBRouter implements IDBRouter {
 			return result;
 		}
 
-		EopSite site = EopContext.getContext().getCurrentSite();
+		EopSite site = EsfContext.getContext().getCurrentSite();
 		Integer userid = site.getUserid();
 		Integer siteid = site.getId();
 

@@ -107,22 +107,18 @@ public class ComponentManager extends BaseSupport
             }
     }
 
-    public void install(String componentid)
-    {
+    public void install(String componentid){
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("install component[" + componentid + "]...");
         }
-        try
-        {
+        try{
             ComponentView componentView = getComponentView(componentid);
 
             if (componentView != null) {
                 componentView.getComponent().install();
-
                 if (!isInDb(componentView.getComponentid())) {
                     ComponentView temp = (ComponentView)componentView.clone();
                     temp.setInstall_state(1);
-
                     this.baseDaoSupport.insert("component", temp);
                 }
                 else {
@@ -140,8 +136,7 @@ public class ComponentManager extends BaseSupport
         return this.baseDaoSupport.queryForInt(sql, new Object[] { componentid }) > 0;
     }
 
-    public void unInstall(String componentid)
-    {
+    public void unInstall(String componentid){
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("install component[" + componentid + "]...");
         }
@@ -168,7 +163,10 @@ public class ComponentManager extends BaseSupport
 
         ComponentView componentView = getComponentView(componentid);
 
+
         List<PluginView> pluginList = componentView.getPluginList();
+
+
         IPlugin plugin;
         for (PluginView pluginView : pluginList) {
             String pluginid = pluginView.getId();

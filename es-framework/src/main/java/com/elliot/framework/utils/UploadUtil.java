@@ -1,6 +1,6 @@
 package com.elliot.framework.utils;
 
-import com.elliot.context.EopContext;
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 
 import java.util.regex.Matcher;
@@ -38,6 +38,6 @@ public class UploadUtil {
         if(StringUtil.isEmpty(path)) return path;
         //if(!path.startsWith(ParamSetting.FILE_STORE_PREFIX)) return path;
 
-        return     path.replaceAll(ParamSetting.FILE_STORE_PREFIX, ParamSetting.IMG_SERVER_DOMAIN+ EopContext.getContext().getContextPath() );
+        return     path.replaceAll(ParamSetting.FILE_STORE_PREFIX, ParamSetting.IMG_SERVER_DOMAIN+ EsfContext.getContext().getContextPath() );
     }
 }

@@ -1,6 +1,6 @@
 package com.elliot.framework.plugin;
 
-import com.elliot.context.EopContext;
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 import com.elliot.context.model.EopSite;
 import org.apache.commons.logging.Log;
@@ -85,7 +85,7 @@ public abstract class AutoRegisterPluginsBundle implements IPluginBundle {
     }
 
     private String getKey() {
-        EopSite site = EopContext.getContext().getCurrentSite();
+        EopSite site = EsfContext.getContext().getCurrentSite();
         int userid = site.getUserid().intValue();
         int siteid = site.getId().intValue();
         String key = userid + "_" + siteid;

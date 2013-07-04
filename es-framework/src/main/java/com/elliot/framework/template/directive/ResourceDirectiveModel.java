@@ -2,7 +2,7 @@
 /*    */ 
 /*    */
 
-import com.elliot.context.EopContext;
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 import com.elliot.context.model.EopSite;
 import com.elliot.framework.resources.Resource;
@@ -75,7 +75,7 @@ import java.util.Map;
 /* 65 */       pic = UploadUtil.replacePath(pic);
 /*    */     }
 /*    */     else {
-/* 68 */       EopContext ectx = EopContext.getContext();
+/* 68 */       EsfContext ectx = EsfContext.getContext();
 /*    */ 
 /* 71 */       if (!pic.startsWith("/")) {
 /* 72 */         pic = "/" + pic;

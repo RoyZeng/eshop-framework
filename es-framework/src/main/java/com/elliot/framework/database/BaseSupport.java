@@ -2,9 +2,7 @@ package com.elliot.framework.database;
 
 import org.apache.log4j.Logger;
 
-import com.elliot.context.EopContext;
-import com.elliot.framework.database.IDBRouter;
-import com.elliot.framework.database.IDaoSupport;
+import com.elliot.context.EsfContext;
 
 public abstract class BaseSupport<T> {
 	protected final Logger logger = Logger.getLogger(getClass());
@@ -31,7 +29,7 @@ public abstract class BaseSupport<T> {
 			throw new PermssionRuntimeException();
 		}
 		
-		Integer suserid = EopContext.getContext().getCurrentSite().getUserid();	
+		Integer suserid = EsfContext.getContext().getCurrentSite().getUserid();
 		
 		if(suserid.intValue()!=userid.intValue()){
 			throw new PermssionRuntimeException();

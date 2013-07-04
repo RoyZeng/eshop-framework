@@ -2,7 +2,7 @@
 /*     */ 
 /*     */
 
-import com.elliot.context.EopContext;
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 import com.elliot.context.model.EopSite;
 import com.elliot.framework.context.webcontext.ThreadContextHolder;
@@ -121,7 +121,7 @@ import java.util.Map;
 /*     */   {
 /* 195 */     if ((!isCommonScriptCreated()) || (ResourceStateManager.getHaveNewDisploy()))
 /*     */     {
-/* 197 */       EopContext ectx = EopContext.getContext();
+/* 197 */       EsfContext ectx = EsfContext.getContext();
 /* 198 */       String target = ectx.getResPath();
 /* 199 */       String themepath = ectx.getCurrentSite().getThemepath();
 /*     */ 
@@ -150,7 +150,7 @@ import java.util.Map;
 /*     */     throws EvaluatorException, IOException
 /*     */   {
 /* 232 */     if ((!isCommonCssCreated()) || (ResourceStateManager.getHaveNewDisploy())) {
-/* 233 */       EopContext ectx = EopContext.getContext();
+/* 233 */       EsfContext ectx = EsfContext.getContext();
 /* 234 */       String target = ectx.getResPath();
 /* 235 */       String themepath = ectx.getCurrentSite().getThemepath();
 /*     */ 
@@ -227,7 +227,7 @@ import java.util.Map;
 /*     */   private static boolean isCommonScriptCreated()
 /*     */   {
 /* 365 */     if ("2".equals(ParamSetting.RUNMODE)) {
-/* 366 */       EopSite site = EopContext.getContext().getCurrentSite();
+/* 366 */       EopSite site = EsfContext.getContext().getCurrentSite();
 /* 367 */       String key = "script_created_" + site.getUserid() + "_" + site.getId();
 /* 368 */       return !StringUtil.isEmpty((String)commonScriptStateMap.get(key));
 /*     */     }
@@ -237,7 +237,7 @@ import java.util.Map;
 /*     */   private static boolean isCommonCssCreated()
 /*     */   {
 /* 384 */     if ("2".equals(ParamSetting.RUNMODE)) {
-/* 385 */       EopSite site = EopContext.getContext().getCurrentSite();
+/* 385 */       EopSite site = EsfContext.getContext().getCurrentSite();
 /* 386 */       String key = "script_created_" + site.getUserid() + "_" + site.getId();
 /* 387 */       return !StringUtil.isEmpty((String)commonCssStateMap.get(key));
 /*     */     }
@@ -254,7 +254,7 @@ import java.util.Map;
 /*     */   {
 /* 422 */     if ("2".equals(ParamSetting.RUNMODE))
 /*     */     {
-/* 424 */       EopSite site = EopContext.getContext().getCurrentSite();
+/* 424 */       EopSite site = EsfContext.getContext().getCurrentSite();
 /* 425 */       String key = "image_created_" + site.getUserid() + "_" + site.getId();
 /* 426 */       return imageMap.get(key) != null;
 /*     */     }
@@ -271,7 +271,7 @@ import java.util.Map;
 /*     */   private static void setCommonScriptCreated()
 /*     */   {
 /* 455 */     if ("2".equals(ParamSetting.RUNMODE)) {
-/* 456 */       EopSite site = EopContext.getContext().getCurrentSite();
+/* 456 */       EopSite site = EsfContext.getContext().getCurrentSite();
 /* 457 */       String key = "script_created_" + site.getUserid() + "_" + site.getId();
 /* 458 */       commonScriptStateMap.put(key, "created");
 /*     */     }
@@ -283,7 +283,7 @@ import java.util.Map;
 /*     */   private static void setCommonCssCreated()
 /*     */   {
 /* 472 */     if ("2".equals(ParamSetting.RUNMODE)) {
-/* 473 */       EopSite site = EopContext.getContext().getCurrentSite();
+/* 473 */       EopSite site = EsfContext.getContext().getCurrentSite();
 /* 474 */       String key = "script_created_" + site.getUserid() + "_" + site.getId();
 /* 475 */       commonCssStateMap.put(key, "created");
 /*     */     } else {
@@ -301,7 +301,7 @@ import java.util.Map;
 /*     */   {
 /* 498 */     if ("2".equals(ParamSetting.RUNMODE))
 /*     */     {
-/* 500 */       EopSite site = EopContext.getContext().getCurrentSite();
+/* 500 */       EopSite site = EsfContext.getContext().getCurrentSite();
 /* 501 */       String key = "image_created_" + site.getUserid() + "_" + site.getId();
 /* 502 */       imageMap.put(key, "created");
 /*     */     }
@@ -313,7 +313,7 @@ import java.util.Map;
 /*     */   private static String getKey(String pageid)
 /*     */   {
 /* 513 */     String key = pageid;
-/* 514 */     EopSite site = EopContext.getContext().getCurrentSite();
+/* 514 */     EopSite site = EsfContext.getContext().getCurrentSite();
 /*     */ 
 /* 517 */     if ("2".equals(ParamSetting.RUNMODE)) {
 /* 518 */       key = pageid + "_" + site.getUserid() + "_" + site.getId();
@@ -325,7 +325,7 @@ import java.util.Map;
 /*     */   private static void dispatchRes(String pageid, String tplFileName)
 /*     */     throws EvaluatorException, IOException
 /*     */   {
-/* 535 */     EopContext ectx = EopContext.getContext();
+/* 535 */     EsfContext ectx = EsfContext.getContext();
 /*     */ 
 /* 542 */     String target = ectx.getResPath();
 /* 543 */     String themepath = ectx.getCurrentSite().getThemepath();
@@ -387,14 +387,14 @@ import java.util.Map;
 /*     */ 
 /* 632 */     if (path.endsWith("/")) path = path.substring(0, path.length() - 1);
 /*     */ 
-/* 636 */     path = path + EopContext.getContext().getContextPath();
+/* 636 */     path = path + EsfContext.getContext().getContextPath();
 /* 637 */     return path;
 /*     */   }
 /*     */ 
 /*     */   public static String getNotMergeResource()
 /*     */   {
 /* 649 */     HttpServletRequest request = ThreadContextHolder.getHttpRequest();
-/* 650 */     EopContext ectx = EopContext.getContext();
+/* 650 */     EsfContext ectx = EsfContext.getContext();
 /* 651 */     String domain = ectx.getResDomain();
 /*     */ 
 /* 653 */     List<Resource> scriptList = (List)request.getAttribute("headerScriptList");
@@ -436,7 +436,7 @@ import java.util.Map;
 /* 690 */     StringWriter result = new StringWriter();
 /* 691 */     String src = resource.getSrc();
 /* 692 */     if (!src.startsWith("/")) src = "/" + src;
-/* 693 */     EopContext ctx = EopContext.getContext();
+/* 693 */     EsfContext ctx = EsfContext.getContext();
 /* 694 */     String respath = getResSourcePath();
 /* 695 */     src = respath + "/themes/" + ctx.getCurrentSite().getThemepath() + src;
 /*     */ 

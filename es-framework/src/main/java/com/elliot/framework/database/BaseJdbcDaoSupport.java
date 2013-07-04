@@ -5,13 +5,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.elliot.context.EsfContext;
 import com.elliot.framework.utils.ReflectionUtil;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
-import com.elliot.context.EopContext;
-import com.elliot.framework.database.IDBRouter;
-import com.elliot.framework.database.Page;
 import com.elliot.framework.database.impl.JdbcDaoSupport;
 
 /**
@@ -152,7 +150,7 @@ public class BaseJdbcDaoSupport<T> extends JdbcDaoSupport<T> {
 	 * @return
 	 */
 	private Integer getCurrentUserId() {
-		Integer userid = EopContext.getContext().getCurrentSite().getUserid();
+		Integer userid = EsfContext.getContext().getCurrentSite().getUserid();
 		return userid;
 	}
 
@@ -162,7 +160,7 @@ public class BaseJdbcDaoSupport<T> extends JdbcDaoSupport<T> {
 	 * @return
 	 */
 	private Integer getCurrentSiteId() {
-		Integer id = EopContext.getContext().getCurrentSite().getId();
+		Integer id = EsfContext.getContext().getCurrentSite().getId();
 		return id;
 	}
 
