@@ -29,8 +29,17 @@ public abstract class DBSolution implements IDBSolution {
 	protected Connection conn;
 
 	protected JdbcTemplate jdbcTemplate;
+    protected String sqlExchange;
 
-	public JdbcTemplate getJdbcTemplate() {
+    public String getSqlExchange() {
+        return sqlExchange;
+    }
+
+    public void setSqlExchange(String sqlExchange) {
+        this.sqlExchange = sqlExchange;
+    }
+
+    public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
 
@@ -197,35 +206,22 @@ public abstract class DBSolution implements IDBSolution {
 
 	@Override
 	public boolean dbExport(String[] tables, String xml) {
-		DBExporter dbExporter = new DBExporter();
-		if (dbExporter.createPorter(this, conn)) {
-			boolean result = dbExporter.doExport(prefix, tables, xml);
-			return result & dbExporter.closePorter();
-		}
-		return false;
+        DBExporter dbExporter = new DBExporter(this);
+        return dbExporter.doExport(this.prefix, tables, xml);
 	}
 
 	@Override
 	public String dbExport(String[] tables, boolean dataOnly) {
-		DBExporter dbExporter = new DBExporter();
-		if (dbExporter.createPorter(this, conn)) {
-			String result = dbExporter.doExport(prefix, tables, dataOnly);
-			if (!dbExporter.closePorter())
-				result = null;
-			return result;
-		}
-		return null;
+        DBExporter dbExporter = new DBExporter(this);
+        return dbExporter.doExport(this.prefix, tables, dataOnly);
+
 	}
 	@Override
-	public boolean dbImport(String xml) {
-		initFunctions();
-		DBImporter dbImporter = new DBImporter();
-		if (dbImporter.createPorter(this, conn)) {
-			boolean result = dbImporter.doImport(xml);
-			return result & dbImporter.closePorter();
-		}
-		return false;
-	}
+    public boolean dbImport(String xml) {
+        initFunctions();
+        DBImporter dbImporter = new DBImporter(this);
+        return dbImporter.doImport(xml);
+    }
 
 	@Override
 	public void setPrefix(String prefix) {

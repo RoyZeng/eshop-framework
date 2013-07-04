@@ -20,7 +20,9 @@ public class DBExporter extends DBPorter {
 	private String prefix = "";
 	private String beginLine = "\t";
 	private String endLine = "\n";
-
+    public DBExporter(DBSolution solution){
+        super(solution);
+    }
 	/**
 	 * 返回count个beginLine内容，用于格式化输出行
 	 * 
@@ -139,10 +141,11 @@ public class DBExporter extends DBPorter {
 	 */
 	private void createFieldXml(String table, StringBuilder xmlFile)
 			throws SQLException {
-		Statement st = conn.createStatement();
+        Statement st = this.solution.conn.createStatement();
+
 		ResultSet rs = st.executeQuery("select * from " + prefix + table);
 
-		DatabaseMetaData metaData = conn.getMetaData();
+        DatabaseMetaData metaData = this.solution.conn.getMetaData();
 		Map<String, String> columns = new HashMap<String, String>();
 		ResultSet mdrs = metaData.getColumns(null, null, table.toUpperCase(),
 				"%");
@@ -164,10 +167,15 @@ public class DBExporter extends DBPorter {
 			xmlFile.append("<size>" + rsmd.getPrecision(i) + "</size>");
 			xmlFile.append("<option>" + getFieldOption(rsmd, i) + "</option>");
 
-			if (columns.get(columnName) != null)
-				xmlFile.append("<default>"
-						+ solution.getFieldValue(rsmd.getColumnType(i),
-								columns.get(columnName)) + "</default>");
+			if (columns.get(columnName) != null){
+                String value = this.solution.getFieldValue(rsmd.getColumnType(i), columns.get(columnName));
+                value = value.replaceAll("\\(", "");
+                value = value.replaceAll("\\)", "");
+                xmlFile.append("<default>"
+                        + solution.getFieldValue(rsmd.getColumnType(i),
+                        columns.get(columnName)) + "</default>");
+            }
+
 
 			xmlFile.append("</field>" + endLine);
 		}
@@ -200,7 +208,7 @@ public class DBExporter extends DBPorter {
 	 */
 	private boolean insertDataXml(String table, StringBuilder xmlFile) {
 		try {
-			Statement st = conn.createStatement();
+            Statement st = this.solution.conn.createStatement();
 			ResultSet rs = st.executeQuery("select * from " + prefix + table);
 			ResultSetMetaData rsmd = rs.getMetaData();
 

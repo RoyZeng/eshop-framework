@@ -1,6 +1,9 @@
 package com.elliot.framework.database.dbsolution.impl;
 
 import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,10 @@ import org.dom4j.io.SAXReader;
  */
 public class DBImporter extends DBPorter {
 	private Document xmlDoc;
+
+    public DBImporter(DBSolution solution){
+        super(solution);
+    }
 
 	/**
 	 * 加载xml文件
@@ -46,6 +53,13 @@ public class DBImporter extends DBPorter {
 		return objects;
 	}
 
+    private void doExecute(Statement state, String sql) {
+        try {
+            if (sql != null)
+                state.execute(sql);
+        } catch (SQLException e) {
+        }
+    }
 	private boolean doInsert(Element action) {
 		String table = solution.getTableName(action.elementText("table"));
 		String fields = action.elementText("fields");
@@ -61,9 +75,18 @@ public class DBImporter extends DBPorter {
 		sql = sql.substring(0, sql.length() - 1) + ")";
 
 		try {
+            Statement state = this.solution.conn.createStatement();
+            PreparedStatement ps = this.solution.conn.prepareStatement(sql);
+            for (int i = 1; i <= value.length; i++) {
+                ps.setObject(i, objects.get(i - 1));
+            }
 			if (solution.beforeInsert(table, fields, values)) {
-				solution.jdbcTemplate.update(sql,objects.toArray());
-				solution.afterInsert(table, fields, values);
+                doExecute(state, this.solution.getSqlExchange());
+                ps.execute();
+                this.solution.afterInsert(table, fields, values);
+                doExecute(state, this.solution.getSqlExchange());
+                ps.close();
+                state.close();
 			} else {
 				System.out.println("beforeInsert返回false，insert被阻止！");
 				return false;
