@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	
+	<!-- 安装 -->
+	<package name="install" namespace="/install" extends="eop_default">
+		<action name="install" class="installAction">
+			<result name="step1">step1.jsp</result>
+			<result name="step2">step2.jsp</result>
+			<result name="step3">step3.jsp</result>
+			<result name="success">success.jsp</result>
+		</action>	
+	</package>
+
+	 
+</struts>
