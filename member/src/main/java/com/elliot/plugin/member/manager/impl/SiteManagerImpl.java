@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 import com.elliot.framework.utils.DateUtil;
 import com.elliot.framework.utils.FileUtil;
@@ -25,7 +26,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.elliot.context.model.EopSite;
-import com.elliot.context.EopContext;
 import com.elliot.framework.context.webcontext.ThreadContextHolder;
 import com.elliot.framework.context.webcontext.WebSessionContext;
 import com.elliot.framework.database.IDaoSupport;
@@ -382,7 +382,7 @@ public class SiteManagerImpl implements ISiteManager {
 	}
 
 	public Page list(int pageNo, int pageSize, String order, String search) {
-		Integer userid = EopContext.getContext().getCurrentSite().getUserid();
+		Integer userid = EsfContext.getContext().getCurrentSite().getUserid();
 		List<EopSiteDomain> listdomain = this.domainManager.listUserDomain();
 		if (search == null)
 			search = "";
@@ -432,15 +432,15 @@ public class SiteManagerImpl implements ISiteManager {
 	}
 
 	public void changeAdminTheme(Integer themeid) {
-		EopSite site = EopContext.getContext().getCurrentSite();
+		EopSite site = EsfContext.getContext().getCurrentSite();
 		String sql = "update eop_site set adminthemeid=? where userid=? and id=?";
 		this.daoSupport.execute(sql, themeid, site.getUserid(), site.getId());
-		EopContext.getContext().getCurrentSite().setAdminthemeid(themeid);
+		EsfContext.getContext().getCurrentSite().setAdminthemeid(themeid);
 
 	}
 
 	public void changeTheme(Integer themeid) {
-		EopSite site = EopContext.getContext().getCurrentSite();
+		EopSite site = EsfContext.getContext().getCurrentSite();
 		Theme theme = themeManager.getTheme(themeid);
 		String sql = "update eop_site set themeid=?,themepath=? where userid=? and id=?";
 		this.daoSupport.execute(sql, themeid, theme.getPath(),
@@ -466,7 +466,7 @@ public class SiteManagerImpl implements ISiteManager {
 	 * 领取积分
 	 */
 	public int getPoint(Integer id, int point) {
-		EopSite site = EopContext.getContext().getCurrentSite();
+		EopSite site = EsfContext.getContext().getCurrentSite();
 		long lastgetpoint = site.getLastgetpoint();// 上次领取积分的时间
 		long now = (int) (System.currentTimeMillis() / 1000); // 当前时间
 		int onemonth = 60 * 60 * 24 * 30;
@@ -492,7 +492,7 @@ public class SiteManagerImpl implements ISiteManager {
 	public void initData() {
 		if ("2".equals(ParamSetting.RUNMODE)) {
 			// 加载产品的setup.xml文件
-			EopSite site = EopContext.getContext().getCurrentSite();
+			EopSite site = EsfContext.getContext().getCurrentSite();
 			String productId = site.getProductid();
 			org.dom4j.Document setupDoc = setupLoader.load(productId);
 
@@ -510,13 +510,13 @@ public class SiteManagerImpl implements ISiteManager {
 		}
 
 		String sqlPath = ParamSetting.EOP_PATH
-				+ EopContext.getContext().getContextPath() + "/init.sql";
+				+ EsfContext.getContext().getContextPath() + "/init.sql";
 		File file = new File(sqlPath);
 		if (file.exists()) {
 			String content = FileUtil.read(sqlPath, "UTF-8");
 
 			if ("2".equals(ParamSetting.RUNMODE)) {
-				EopSite site = EopContext.getContext().getCurrentSite();
+				EopSite site = EsfContext.getContext().getCurrentSite();
 				content = content.replaceAll("<userid>", String.valueOf(site
 						.getUserid()));
 				content = content.replaceAll("<siteid>", String.valueOf(site
@@ -586,7 +586,7 @@ public class SiteManagerImpl implements ISiteManager {
 	private List<EopApp> listSaasApp(){
 		List<EopApp> appList  = new ArrayList<EopApp>();
 		// 尝试加载proflie.xml，如果不存在则返回所有app
-		String xmlFile = ParamSetting.EOP_PATH+EopContext.getContext().getContextPath() +"/profile.xml";
+		String xmlFile = ParamSetting.EOP_PATH+ EsfContext.getContext().getContextPath() +"/profile.xml";
 		if(new File(xmlFile).exists()){
 			try {
 			
