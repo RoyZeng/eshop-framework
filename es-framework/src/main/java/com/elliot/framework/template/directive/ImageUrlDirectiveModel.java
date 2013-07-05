@@ -81,8 +81,3 @@ import java.util.Map;
 /* 79 */     return pic;
 /*    */   }
 /*    */ }
-
-/* Location:           F:\soft\Tomcat6.0\webapps\javamall\WEB-INF\lib\eop.jar
- * Qualified Name:     com.enation.framework.directive.ImageUrlDirectiveModel
- * JD-Core Version:    0.6.2
- */

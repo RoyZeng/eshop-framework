@@ -6,16 +6,16 @@ import com.elliot.context.model.EopSite;
 import com.elliot.context.model.MultiSite;
 import com.elliot.framework.context.webcontext.ThreadContextHolder;
 
-public class EopContext {
+public class EsfContext {
 	private static ThreadLocal<HttpServletRequest> HttpRequestHolder = new ThreadLocal<HttpServletRequest>();
-	private static ThreadLocal<EopContext> EopContextHolder = new ThreadLocal<EopContext>();
+	private static ThreadLocal<EsfContext> EopContextHolder = new ThreadLocal<EsfContext>();
 	
-	public static void setContext(EopContext context){
+	public static void setContext(EsfContext context){
 		EopContextHolder.set(context);
 	}
 	
-	public static EopContext getContext(){
-		EopContext context =  EopContextHolder.get();
+	public static EsfContext getContext(){
+		EsfContext context =  EopContextHolder.get();
 		return context;
 	}
 	

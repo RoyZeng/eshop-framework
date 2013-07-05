@@ -3,9 +3,7 @@ package com.elliot.framework.database.dbsolution;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.sql.DataSource;
-
-import com.elliot.context.EopContext;
+import com.elliot.context.EsfContext;
 import com.elliot.context.ParamSetting;
 import com.elliot.context.model.EopSite;
 import com.elliot.framework.spring.SpringContextHolder;
@@ -35,7 +33,7 @@ public class DBSolutionFactory {
         if (ParamSetting.RUNMODE.equals("1")) {
             result = dbsolution.dbImport(xml);
         }else {
-            EopSite site = EopContext.getContext().getCurrentSite();
+            EopSite site = EsfContext.getContext().getCurrentSite();
             Integer userid = site.getUserid();
             Integer siteid = site.getId();
             result = dbsolution.dbSaasImport(xml, userid.intValue(), siteid.intValue());
