@@ -4,7 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>欢迎使用系统 安装向导</title>
-<script type="text/javascript" src="../statics/js/common/common-min.js"></script>
+
+    <script type="text/javascript" src="../statics/js/common/jquery-1.3.2.js"></script>
 <link href="images/png.css" rel="stylesheet" type="text/css"  />
 <link href="styles/install.css" rel="stylesheet" type="text/css" />
 <style type="text/css" media="screen">

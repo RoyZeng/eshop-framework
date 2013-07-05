@@ -30,7 +30,9 @@
 </form>
 <script type="text/javascript">
 $(function(){
+    alert("here");
 	$("#donext").click(function(){
+        alert("here");
 		if(!$("#readed").attr("checked")){
 			alert("请您需仔细查看并同意协议内容，才能继续操作！");
 			return false;
