@@ -9,4 +9,5 @@ package com.elliot.esf.context;
  */
 public class ParamsSetting {
     public static boolean isInstall = false;
+    public static String VERSION="1.0.0";
 }

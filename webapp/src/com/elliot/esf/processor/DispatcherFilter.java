@@ -25,14 +25,15 @@ public class DispatcherFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         String uri = request.getServletPath();
-        if(!"/install".equals(uri)&& !ParamsSetting.isInstall){
-            response.sendRedirect("");
+        if(!uri.startsWith("/install")&& !ParamsSetting.isInstall){
+            response.sendRedirect(request.getContextPath()+"/install");
+            return;
         }
-
+        filterChain.doFilter(request,response);
     }
 
     @Override
     public void destroy() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 }
