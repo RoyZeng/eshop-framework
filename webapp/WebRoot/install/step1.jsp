@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
-<h5>【eshop最终用户授权协议】</h5>
+<h5>【ESF平台最终用户授权协议】</h5>
 <form method="post">
   <div style="height: 17em; border: 1px solid rgb(204, 204, 204); margin-bottom: 8px; padding: 5px; background: none repeat scroll 0% 0% rgb(255, 255, 255);line-height:20px; overflow-x: hidden; overflow-y: scroll;"> 
 　　<strong>第一部分：内容摘要（为了您快速浏览协议内容而提供，具体解释请阅读协议正文）</strong>
